@@ -1,0 +1,804 @@
+﻿<UserControl x:Class="CeeVee.Views.Templates.ClassicTemplate"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:converters="clr-namespace:CeeVee.Converters">
+
+    <UserControl.Resources>
+
+        <converters:SectionVisibilityConverter
+            x:Key="SectionVisibilityConverter"/>
+
+        <!-- ================= COLORS ================= -->
+
+        <SolidColorBrush x:Key="NavyBrush"
+                         Color="#1E4B7A"/>
+
+        <SolidColorBrush x:Key="NavyDarkBrush"
+                         Color="#15365A"/>
+
+        <SolidColorBrush x:Key="InkBrush"
+                         Color="#111111"/>
+
+        <SolidColorBrush x:Key="MutedBrush"
+                         Color="#333333"/>
+
+        <SolidColorBrush x:Key="PillBgBrush"
+                         Color="#D9E6F2"/>
+
+        <SolidColorBrush x:Key="PillBorderBrush"
+                         Color="#B5C9DD"/>
+
+        <SolidColorBrush x:Key="LineBrush"
+                         Color="#A0B4C8"/>
+
+
+        <!-- ================= SECTION TITLE ================= -->
+
+        <Style x:Key="SectionTitleBlue"
+               TargetType="TextBlock">
+
+            <Setter Property="FontFamily"
+                    Value="Arial"/>
+
+            <Setter Property="FontSize"
+                    Value="15"/>
+
+            <Setter Property="FontWeight"
+                    Value="Bold"/>
+
+            <Setter Property="Foreground"
+                    Value="{StaticResource NavyBrush}"/>
+
+        </Style>
+
+
+        <!-- ================= BODY ================= -->
+
+        <Style x:Key="BodyText"
+               TargetType="TextBlock">
+
+            <Setter Property="FontFamily"
+                    Value="Arial"/>
+
+            <Setter Property="FontSize"
+                    Value="14"/>
+
+            <Setter Property="Foreground"
+                    Value="{StaticResource MutedBrush}"/>
+
+            <Setter Property="TextWrapping"
+                    Value="Wrap"/>
+
+            <Setter Property="LineHeight"
+                    Value="13"/>
+
+        </Style>
+
+
+        <!-- ================= ITEM TITLE ================= -->
+
+        <Style x:Key="ItemTitle"
+               TargetType="TextBlock">
+
+            <Setter Property="FontFamily"
+                    Value="Arial"/>
+
+            <Setter Property="FontSize"
+                    Value="13"/>
+
+            <Setter Property="FontWeight"
+                    Value="Bold"/>
+
+            <Setter Property="Foreground"
+                    Value="{StaticResource InkBrush}"/>
+
+            <Setter Property="TextWrapping"
+                    Value="Wrap"/>
+
+        </Style>
+
+
+        <!-- ================= ITEM META ================= -->
+
+        <Style x:Key="ItemMeta"
+               TargetType="TextBlock">
+
+            <Setter Property="FontFamily"
+                    Value="Arial"/>
+
+            <Setter Property="FontSize"
+                    Value="13"/>
+
+            <Setter Property="Foreground"
+                    Value="{StaticResource MutedBrush}"/>
+
+            <Setter Property="TextWrapping"
+                    Value="Wrap"/>
+
+        </Style>
+
+    </UserControl.Resources>
+
+
+    <!-- ========================================================= -->
+    <!-- PAGE -->
+    <!-- ========================================================= -->
+
+    <Border x:Name="Paper"
+        Width="{Binding PageWidth}"
+        MinHeight="{Binding PageHeight}"
+        Background="White"
+        HorizontalAlignment="Center"
+        VerticalAlignment="Top">
+
+        <!-- ===================================================== -->
+        <!-- MAIN PAGE CONTENT -->
+        <!-- ===================================================== -->
+
+        <StackPanel Margin="32,16,32,40">
+
+            <!-- ================================================= -->
+            <!-- HEADER -->
+            <!-- ================================================= -->
+
+            <Border Background="{StaticResource NavyBrush}"
+                CornerRadius="10"
+                Padding="20,18,20,14">
+
+                <StackPanel HorizontalAlignment="Center">
+
+                    <!-- NAME -->
+
+                    <TextBlock FontFamily="Arial"
+                           FontSize="22"
+                           FontWeight="ExtraBold"
+                           Foreground="White"
+                           HorizontalAlignment="Center"
+                           TextAlignment="Center">
+
+                    <Run Text="{Binding PersonalDetails.FullName}"/>
+
+                    <Run Text=" "/>
+
+                    <Run Text="{Binding PersonalDetails.LastName}"/>
+
+                    </TextBlock>
+
+
+                    <!-- PROFESSION -->
+
+                    <TextBlock Text="{Binding PersonalDetails.Profession}"
+                           FontFamily="Arial"
+                           FontSize="9.5"
+                           FontWeight="Bold"
+                           Foreground="White"
+                           HorizontalAlignment="Center"
+                           Margin="0,4,0,10"
+                           TextAlignment="Center"
+                           Opacity="0.95"
+                           Visibility="{Binding PersonalDetails.Profession,
+                               Converter={StaticResource SectionVisibilityConverter}}"/>
+
+
+                    <!-- ================================================= -->
+                    <!-- CONTACT DETAILS -->
+                    <!-- ================================================= -->
+
+                    <WrapPanel HorizontalAlignment="Center"
+                           Margin="0,2,0,0">
+
+                        <!-- EMAIL -->
+
+                        <TextBlock FontFamily="Arial"
+                               FontSize="11"
+                               Foreground="White"
+                               Opacity="0.95"
+                               TextAlignment="Center"
+                               TextWrapping="Wrap"
+                               Visibility="{Binding PersonalDetails.Email,
+                                   Converter={StaticResource SectionVisibilityConverter}}">
+
+                        <Run Text="✉ "/>
+
+                        <Run Text="{Binding PersonalDetails.Email}"/>
+
+                        </TextBlock>
+
+
+                        <!-- EMAIL → PHONE -->
+
+                        <TextBlock Text="   |   "
+                               FontFamily="Arial"
+                               FontSize="7.5"
+                               Foreground="White"
+                               Opacity="0.95"
+                               Visibility="{Binding PersonalDetails.Phone,
+                                   Converter={StaticResource SectionVisibilityConverter}}"/>
+
+
+                        <!-- PHONE -->
+
+                        <TextBlock Text="{Binding PersonalDetails.Phone}"
+                               FontFamily="Arial"
+                               FontSize="11"
+                               Foreground="White"
+                               Opacity="0.95"
+                               TextWrapping="Wrap"
+                               Visibility="{Binding PersonalDetails.Phone,
+                                   Converter={StaticResource SectionVisibilityConverter}}"/>
+
+
+                        <!-- PHONE → LOCATION -->
+
+                        <TextBlock Text="   |   "
+                               FontFamily="Arial"
+                               FontSize="7.5"
+                               Foreground="White"
+                               Opacity="0.95"
+                               Visibility="{Binding PersonalDetails.Location,
+                                   Converter={StaticResource SectionVisibilityConverter}}"/>
+
+
+                        <!-- LOCATION -->
+
+                        <TextBlock Text="{Binding PersonalDetails.Location}"
+                               FontFamily="Arial"
+                               FontSize="11"
+                               Foreground="White"
+                               Opacity="0.95"
+                               TextWrapping="Wrap"
+                               Visibility="{Binding PersonalDetails.Location,
+                                   Converter={StaticResource SectionVisibilityConverter}}"/>
+
+
+                        <!-- LOCATION → LINKEDIN -->
+
+                        <TextBlock Text="   |   "
+                               FontFamily="Arial"
+                               FontSize="7.5"
+                               Foreground="White"
+                               Opacity="0.95"
+                               Visibility="{Binding PersonalDetails.LinkedIn,
+                                   Converter={StaticResource SectionVisibilityConverter}}"/>
+
+
+                        <!-- LINKEDIN -->
+
+                        <TextBlock Text="{Binding PersonalDetails.LinkedIn}"
+                               FontFamily="Arial"
+                               FontSize="11"
+                               Foreground="White"
+                               Opacity="0.95"
+                               TextWrapping="Wrap"
+                               Visibility="{Binding PersonalDetails.LinkedIn,
+                                   Converter={StaticResource SectionVisibilityConverter}}"/>
+
+
+                        <!-- LINKEDIN → GITHUB -->
+
+                        <TextBlock Text="   |   "
+                               FontFamily="Arial"
+                               FontSize="7.5"
+                               Foreground="White"
+                               Opacity="0.95"
+                               Visibility="{Binding PersonalDetails.Github,
+                                   Converter={StaticResource SectionVisibilityConverter}}"/>
+
+
+                        <!-- GITHUB -->
+
+                        <TextBlock Text="{Binding PersonalDetails.Github}"
+                               FontFamily="Arial"
+                               FontSize="11"
+                               Foreground="White"
+                               Opacity="0.95"
+                               TextWrapping="Wrap"
+                               Visibility="{Binding PersonalDetails.Github,
+                                   Converter={StaticResource SectionVisibilityConverter}}"/>
+
+                    </WrapPanel>
+
+                </StackPanel>
+
+            </Border>
+
+
+            <!-- ================================================= -->
+            <!-- SUMMARY -->
+            <!-- ================================================= -->
+
+            <StackPanel Margin="0,18,0,14"
+                    Visibility="{Binding HasProfile,
+                        Converter={StaticResource SectionVisibilityConverter}}">
+
+                <TextBlock Text="Professional Summary"
+                       Style="{StaticResource SectionTitleBlue}"/>
+
+                <Border Height="1"
+                    Background="{StaticResource LineBrush}"
+                    Margin="0,3,0,8"
+                    Opacity="0.6"/>
+
+                <TextBlock Text="{Binding Profile.Summary}"
+                       Style="{StaticResource BodyText}"/>
+
+            </StackPanel>
+
+
+            <!-- ================================================= -->
+            <!-- KEY SKILLS -->
+            <!-- ================================================= -->
+
+            <StackPanel Margin="0,0,0,16"
+                    Visibility="{Binding HasSkills,
+                        Converter={StaticResource SectionVisibilityConverter}}">
+
+                <TextBlock Text="KEY SKILLS"
+                       Style="{StaticResource SectionTitleBlue}"/>
+
+                <Border Height="1"
+                    Background="{StaticResource LineBrush}"
+                    Margin="0,3,0,10"
+                    Opacity="0.6"/>
+
+                <ItemsControl ItemsSource="{Binding Skills}">
+
+                    <ItemsControl.ItemsPanel>
+
+                        <ItemsPanelTemplate>
+
+                            <WrapPanel/>
+
+                        </ItemsPanelTemplate>
+
+                    </ItemsControl.ItemsPanel>
+
+                    <ItemsControl.ItemTemplate>
+
+                        <DataTemplate>
+
+                            <Border Background="{StaticResource PillBgBrush}"
+                                BorderBrush="{StaticResource PillBorderBrush}"
+                                BorderThickness="1"
+                                CornerRadius="10"
+                                Padding="8,3,8,4"
+                                Margin="0,0,6,6">
+
+                                <TextBlock Text="{Binding Name}"
+                                       FontFamily="Arial"
+                                       FontSize="13"
+                                       Foreground="{StaticResource NavyDarkBrush}"
+                                       FontWeight="SemiBold"/>
+
+                            </Border>
+
+                        </DataTemplate>
+
+                    </ItemsControl.ItemTemplate>
+
+                </ItemsControl>
+
+            </StackPanel>
+
+
+            <!-- ================================================= -->
+            <!-- PROFESSIONAL EXPERIENCE -->
+            <!-- ================================================= -->
+
+            <StackPanel Margin="0,0,0,16"
+                    Visibility="{Binding HasExperiences,
+                        Converter={StaticResource SectionVisibilityConverter}}">
+
+                <TextBlock Text="PROFESSIONAL EXPERIENCE"
+                       Style="{StaticResource SectionTitleBlue}"/>
+
+                <Border Height="1"
+                    Background="{StaticResource LineBrush}"
+                    Margin="0,3,0,10"
+                    Opacity="0.6"/>
+
+                <ItemsControl ItemsSource="{Binding Experiences}">
+
+                    <ItemsControl.ItemTemplate>
+
+                        <DataTemplate>
+
+                            <StackPanel Margin="0,0,0,15">
+
+                                <Grid>
+
+                                    <Grid.ColumnDefinitions>
+
+                                        <ColumnDefinition Width="*"/>
+
+                                        <ColumnDefinition Width="Auto"/>
+
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock Style="{StaticResource ItemTitle}">
+
+                                    <Run Text="{Binding JobTitle}"/>
+
+                                    <Run Text="  —  "/>
+
+                                    <Run Text="{Binding Company}"
+                                         FontWeight="Normal"
+                                         FontSize="11"/>
+
+                                    </TextBlock>
+
+                                    <TextBlock Grid.Column="1"
+                                           FontFamily="Arial"
+                                           FontSize="11"
+                                           Foreground="{StaticResource MutedBrush}"
+                                           Margin="10,0,0,0"
+                                           VerticalAlignment="Center">
+
+                                    <Run Text="{Binding StartDate,
+                                        StringFormat={}{0:MMM yyyy}}"/>
+
+                                    <Run Text=" — "/>
+
+ <Run Text="{Binding EndDateText, Mode=OneWay}"/>
+
+                                    </TextBlock>
+
+                                </Grid>
+
+                                <TextBlock Text="{Binding Location}"
+                                       Style="{StaticResource ItemMeta}"
+                                       Margin="0,3,0,0"
+                                       Visibility="{Binding Location,
+                                           Converter={StaticResource SectionVisibilityConverter}}"/>
+
+                                <TextBlock Text="{Binding Description}"
+                                       Style="{StaticResource BodyText}"
+                                       Margin="0,5,0,0"
+                                       Visibility="{Binding Description,
+                                           Converter={StaticResource SectionVisibilityConverter}}"/>
+
+                            </StackPanel>
+
+                        </DataTemplate>
+
+                    </ItemsControl.ItemTemplate>
+
+                </ItemsControl>
+
+            </StackPanel>
+
+
+            <!-- ================================================= -->
+            <!-- EDUCATION -->
+            <!-- ================================================= -->
+
+            <StackPanel Margin="0,0,0,14"
+                    Visibility="{Binding HasEducations,
+                        Converter={StaticResource SectionVisibilityConverter}}">
+
+                <TextBlock Text="EDUCATION"
+                       Style="{StaticResource SectionTitleBlue}"/>
+
+                <Border Height="1"
+                    Background="{StaticResource LineBrush}"
+                    Margin="0,3,0,8"
+                    Opacity="0.6"/>
+
+                <ItemsControl ItemsSource="{Binding Educations}">
+
+                    <ItemsControl.ItemTemplate>
+
+                        <DataTemplate>
+
+                            <StackPanel Margin="0,0,0,8">
+
+                                <TextBlock Text="{Binding Degree}"
+                                       Style="{StaticResource ItemTitle}"/>
+
+                                <TextBlock Style="{StaticResource ItemMeta}">
+
+                                <Run Text="{Binding Institution}"/>
+
+                                <Run Text=" — "/>
+
+                                <Run Text="{Binding YearText, Mode=OneWay}"/>
+
+                                </TextBlock>
+
+                            </StackPanel>
+
+                        </DataTemplate>
+
+                    </ItemsControl.ItemTemplate>
+
+                </ItemsControl>
+
+            </StackPanel>
+
+
+            <!-- ================================================= -->
+            <!-- CERTIFICATIONS -->
+            <!-- ================================================= -->
+
+            <StackPanel Margin="0,0,0,14"
+                    Visibility="{Binding HasCertificates,
+                        Converter={StaticResource SectionVisibilityConverter}}">
+
+                <TextBlock Text="CERTIFICATIONS"
+                       Style="{StaticResource SectionTitleBlue}"/>
+
+                <Border Height="1"
+                    Background="{StaticResource LineBrush}"
+                    Margin="0,3,0,8"
+                    Opacity="0.6"/>
+
+                <ItemsControl ItemsSource="{Binding Certificates}">
+
+                    <ItemsControl.ItemTemplate>
+
+                        <DataTemplate>
+
+                            <StackPanel Margin="0,0,0,5">
+
+                                <TextBlock Style="{StaticResource ItemMeta}">
+
+                                <Run Text="• "/>
+
+                                <Run Text="{Binding Name}"/>
+
+                                <Run Text=" — "/>
+
+                                <Run Text="{Binding Institution}"/>
+
+                                <Run Text=" — "/>
+
+                                <Run Text="{Binding Year,
+                                    StringFormat={}{0:MMMM yyyy}}"/>
+
+                                </TextBlock>
+
+                            </StackPanel>
+
+                        </DataTemplate>
+
+                    </ItemsControl.ItemTemplate>
+
+                </ItemsControl>
+
+            </StackPanel>
+
+
+            <!-- ================================================= -->
+            <!-- LANGUAGES -->
+            <!-- ================================================= -->
+
+            <StackPanel Margin="0,0,0,14"
+                    Visibility="{Binding HasLanguages,
+                        Converter={StaticResource SectionVisibilityConverter}}">
+
+                <TextBlock Text="LANGUAGES"
+                       Style="{StaticResource SectionTitleBlue}"/>
+
+                <Border Height="1"
+                    Background="{StaticResource LineBrush}"
+                    Margin="0,3,0,8"
+                    Opacity="0.6"/>
+
+                <ItemsControl ItemsSource="{Binding Languages}">
+
+                    <ItemsControl.ItemsPanel>
+
+                        <ItemsPanelTemplate>
+
+                            <WrapPanel/>
+
+                        </ItemsPanelTemplate>
+
+                    </ItemsControl.ItemsPanel>
+
+                    <ItemsControl.ItemTemplate>
+
+                        <DataTemplate>
+
+                            <Border Background="{StaticResource PillBgBrush}"
+                                BorderBrush="{StaticResource PillBorderBrush}"
+                                BorderThickness="1"
+                                CornerRadius="10"
+                                Padding="8,3,8,4"
+                                Margin="0,0,6,6">
+
+                                <TextBlock Text="{Binding Name}"
+                                       FontFamily="Arial"
+                                       FontSize="13"
+                                       Foreground="{StaticResource NavyDarkBrush}"/>
+
+                            </Border>
+
+                        </DataTemplate>
+
+                    </ItemsControl.ItemTemplate>
+
+                </ItemsControl>
+
+            </StackPanel>
+
+
+            <!-- ================================================= -->
+            <!-- PROJECTS -->
+            <!-- ================================================= -->
+
+            <StackPanel Margin="0,0,0,14"
+                    Visibility="{Binding HasProjects,
+                        Converter={StaticResource SectionVisibilityConverter}}">
+
+                <TextBlock Text="PROJECTS"
+                       Style="{StaticResource SectionTitleBlue}"/>
+
+                <Border Height="1"
+                    Background="{StaticResource LineBrush}"
+                    Margin="0,3,0,8"
+                    Opacity="0.6"/>
+
+                <ItemsControl ItemsSource="{Binding Projects}">
+
+                    <ItemsControl.ItemTemplate>
+
+                        <DataTemplate>
+
+                            <StackPanel Margin="0,0,0,9">
+
+                                <TextBlock Text="{Binding Title}"
+                                        FontSize="14"
+                                       Style="{StaticResource ItemTitle}"/>
+
+                                <TextBlock Text="{Binding Description}"
+                                       Style="{StaticResource BodyText}"
+                                       Margin="0,3,0,0"
+                                       Visibility="{Binding Description,
+                                           Converter={StaticResource SectionVisibilityConverter}}"/>
+
+                                <TextBlock Text="{Binding Link}"
+                                       Style="{StaticResource ItemMeta}"
+                                       Margin="0,3,0,0"
+                                        FontSize="12"
+                                       Visibility="{Binding Link,
+                                           Converter={StaticResource SectionVisibilityConverter}}"/>
+
+                            </StackPanel>
+
+                        </DataTemplate>
+
+                    </ItemsControl.ItemTemplate>
+
+                </ItemsControl>
+
+            </StackPanel>
+
+
+            <!-- ================================================= -->
+            <!-- ACHIEVEMENTS -->
+            <!-- ================================================= -->
+
+            <StackPanel Margin="0,0,0,14"
+                    Visibility="{Binding HasAchievements,
+                        Converter={StaticResource SectionVisibilityConverter}}">
+
+                <TextBlock Text="ACHIEVEMENTS"
+                       Style="{StaticResource SectionTitleBlue}"/>
+
+                <Border Height="1"
+                    Background="{StaticResource LineBrush}"
+                    Margin="0,3,0,8"
+                    Opacity="0.6"/>
+
+                <ItemsControl ItemsSource="{Binding Achievements}">
+
+                    <ItemsControl.ItemTemplate>
+
+                        <DataTemplate>
+
+                            <StackPanel Margin="0,0,0,7">
+
+                                <TextBlock Style="{StaticResource ItemTitle}">
+
+                                <Run Text="• "/>
+
+                                <Run Text="{Binding Title}"/>
+
+                                </TextBlock>
+
+                                <TextBlock Text="{Binding Description}"
+                                       Style="{StaticResource BodyText}"
+                                       Margin="12,2,0,0"
+                                       Visibility="{Binding Description,
+                                           Converter={StaticResource SectionVisibilityConverter}}"/>
+
+                                <TextBlock Text="{Binding Year,
+                                StringFormat={}{0:MMMM yyyy}}"
+                                       Style="{StaticResource ItemMeta}"
+                                       Margin="12,2,0,0"/>
+
+                            </StackPanel>
+
+                        </DataTemplate>
+
+                    </ItemsControl.ItemTemplate>
+
+                </ItemsControl>
+
+            </StackPanel>
+
+
+            <!-- ================================================= -->
+            <!-- REFERENCES -->
+            <!-- ================================================= -->
+
+            <StackPanel Margin="0,0,0,14"
+                    Visibility="{Binding HasReferences,
+                        Converter={StaticResource SectionVisibilityConverter}}">
+
+                <TextBlock Text="REFERENCES"
+                       Style="{StaticResource SectionTitleBlue}"/>
+
+                <Border Height="1"
+                    Background="{StaticResource LineBrush}"
+                    Margin="0,3,0,8"
+                    Opacity="0.6"/>
+
+                <ItemsControl ItemsSource="{Binding References}">
+
+                    <ItemsControl.ItemTemplate>
+
+                        <DataTemplate>
+
+                            <StackPanel Margin="0,0,0,8">
+
+                                <TextBlock Text="{Binding Name}"
+                                       Style="{StaticResource ItemTitle}"/>
+
+                                <TextBlock Style="{StaticResource ItemMeta}">
+
+                                <Run Text="{Binding Position}"/>
+
+                                <Run Text=" — "/>
+
+                                <Run Text="{Binding Company}"/>
+
+                                </TextBlock>
+
+                                <TextBlock Style="{StaticResource ItemMeta}"
+                                       Margin="0,2,0,0">
+
+                                <Run Text="{Binding Email}"/>
+
+                                <Run Text=" | "/>
+
+                                <Run Text="{Binding Phone}"/>
+
+                                </TextBlock>
+
+                            </StackPanel>
+
+                        </DataTemplate>
+
+                    </ItemsControl.ItemTemplate>
+
+                </ItemsControl>
+
+            </StackPanel>
+
+
+            <!-- ===================================================== -->
+            <!-- CLOSE MAIN PAGE STACKPANEL -->
+            <!-- ===================================================== -->
+
+        </StackPanel>
+
+
+        <!-- ========================================================= -->
+        <!-- CLOSE PAPER BORDER -->
+        <!-- ========================================================= -->
+
+    </Border>
+
+</UserControl>
